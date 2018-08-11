@@ -1,4 +1,7 @@
-## Welcome to GitHub Pages
+## Bienvenido a mi rincon ñoño. 
+
+Aquí encontraras básicamente las soluciones a las tareas.
+Uso -Python 2.7.14
 
 You can use the [editor on GitHub](https://github.com/joescalona/Programacion-Astronomica/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
 
