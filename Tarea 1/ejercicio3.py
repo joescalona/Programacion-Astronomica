@@ -65,34 +65,3 @@ while c<a and c<b:
 	if b<a:
 		print(x + str(c) +','+str(b)+','+str(a))
 		break
-																		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-																		
-											
