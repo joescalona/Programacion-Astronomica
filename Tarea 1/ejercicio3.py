@@ -47,10 +47,6 @@ while a<b and a<c:
 	if c<b:
 		print(x + str(a) +','+str(c)+','+str(b))
 		break
-	if b==c or c==b:
-		print(x + str(a) +','+str(b)+','+str(c))
-		break
-
 while b<a and b<c:
 	if a<c:
 		print(x + str(b) +','+str(a)+','+str(c))
