@@ -1,4 +1,4 @@
-http://astrometrico.es/wp-content/uploads/2017/01/eso1705a_banner.jpg
+! [pene] http://astrometrico.es/wp-content/uploads/2017/01/eso1705a_banner.jpg ("holi")
 
 ## Bienvenido a mi rincón ñoño. 
 Aquí encontraras básicamente las soluciones a las tareas del ramo Programación Astronómica.
