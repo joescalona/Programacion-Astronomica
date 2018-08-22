@@ -1,0 +1,29 @@
+#DEFINIMOS FUNCION QUE ARROJA SI UN VALOR ES PRIMO O NO 
+#INPUT = X
+#SI X ES PRIMO, RETORNA 1
+#SI NO, RETORNA 0
+
+def es_primo(x):
+#INICIO LOOP DESDE 2 HASTA X-1 
+    for i in range(2,x):
+
+#LA FUNCION -IF ANY(LISTA)- LA APRENDI EN SOLOLEARN (SECCION "MAS TIPOS >> FUNCIONES 
+#UTILES")
+#PARA QUE UN NUMERO SEA PRIMO, ESTE DEBE SER DIVISIBLE SOLO POR 1 Y EL MISMO
+#POR LO TANTO SI EXISTIERA ALGUN i (IF ANY) QUE EL CUOCIENTE ENTRE EL NUMERO E i 
+#SEA IGUAL A 0
+#EL NUMERO NO ES PRIMO (Y LA FUNCION RETORNARA 0)
+        if any([x%i==0]):
+            return 0 
+    return 1
+
+#LISTA DE PRIMOS INICIALMENTE VACIA
+primos=[]
+
+#PROBAR ENTRE 10-19 
+for j in range(10,20):
+    if es_primo(j)==1:
+        primos.append(j)
+
+print (' Lista de primos entre 10 y 19 es \n '+str(primos)) 
+
