@@ -1,0 +1,822 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Escalona\_Joaquin\_3}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Ejercicio 1}\label{ejercicio-1}
+
+Debe escribir un programa que le pida a un usuario adivinar un nombre,
+pero sólo tienen 3 posibilidades hasta que el programa se cierra.
+
+\subsection{Solucion}\label{solucion}
+
+\href{https://es.stackoverflow.com/questions/14454/python-extraer-objeto-al-azar-de-una-lista}{Elegir
+aleatoriamente} -\/-\textgreater{} De aquí saqué la forma para elegir
+aleatoriamente un elemento de una lista.
+
+El programa a continuación elegirá aleatoriamente un elemento de la
+lista y el usuario debe adivinarlo. Si no lo logra, el programa
+imprimirá el nombre que ha elegido.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}IMPORTAR RANDOM PARA ELEGIR UN ELEMENTO AL AZAR}
+        \PY{k+kn}{import} \PY{n+nn}{random} 
+        
+        \PY{n}{nombres} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amelia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Luis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Jaime}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Neil}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Constanza}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Joaquin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yuuki}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{nom\PYZus{}elegido}\PY{o}{=}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{nombres}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}IMPRIMIR CONDICIONES DEL JUEGO}
+        \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{} ADIVINA EL NOMBRE \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{ Tendras solo 3 oportunidades}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Los nombres a elegir son = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{nombres}\PY{p}{:}
+            \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{i}
+        
+        
+        \PY{c+c1}{\PYZsh{}PEDIR UN NOMBRE}
+        \PY{n}{n}\PY{o}{=}\PY{n+nb}{raw\PYZus{}input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{ Comencemos, elige un nombre = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}CONTADOR (POSIBILIDADES) = 1}
+        \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{1}
+        \PY{c+c1}{\PYZsh{}CICLO CON TOPE = 3}
+        \PY{k}{while} \PY{n+nb+bp}{True}\PY{p}{:}
+        \PY{c+c1}{\PYZsh{}SI EL USUARIO ADIVINA}
+            \PY{k}{if} \PY{n}{n} \PY{o}{==} \PY{n}{nom\PYZus{}elegido}\PY{p}{:}
+                \PY{k}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Correcto! has adivinado :)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{break}
+        \PY{c+c1}{\PYZsh{}SINO, SE DESCUENTA UNA POSIBILIDAD (AGREGANDOLE A COUNT)   }
+            \PY{k}{else}\PY{p}{:} 
+                \PY{n}{count}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+        \PY{c+c1}{\PYZsh{}NONE NECESARIO PARA QUE EL USUARIO VUELVA A INTENTAR}
+                \PY{n}{n}\PY{o}{=}\PY{n+nb+bp}{None}
+                \PY{n}{n}\PY{o}{=}\PY{n+nb}{raw\PYZus{}input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{ Nope, intentalo nuevamente,elige un nombre = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}SI LLEGA A 3 POSIBILIDADES}
+                \PY{k}{if} \PY{n}{count} \PY{o}{==} \PY{l+m+mi}{3}\PY{p}{:}
+                    \PY{k}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Has ocupado tus 3 opciones}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{El nombre era = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{nom\PYZus{}elegido}
+                    \PY{k}{break} 
+\end{Verbatim}
+
+
+    \section{Ejercicio 2}\label{ejercicio-2}
+
+    Arreglen el código adjunto para que haga lo esperado: solo deje
+``pasar'' a personal con uno de los tres nombres especificados. Deben
+usar como mucho solo una instancia de ``==``.
+
+    Codigo adjunto:
+
+\begin{verbatim}
+import sys
+print("Hello. Please enter your name:")
+name = sys.stdin.readline().strip()
+if name == "Ana" or "Maria" or “Itziar":
+    print("Access granted.")
+else:
+    print("Access denied.")
+\end{verbatim}
+
+    \subsection{Solución}\label{soluciuxf3n}
+
+La forma en que se me ha ocurrido hacer el problema es incluir los
+nombres del personal a una lista y hacer un ciclo IF como una puerta de
+entrada: si el nombre ingresado se encuentra en la lista, se abre la
+puerta, sino, no.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{import} \PY{n+nn}{sys}
+        \PY{c+c1}{\PYZsh{}LISTA CON NOMBRES PERMITIDOS}
+        \PY{n}{personal}\PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ana}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Maria}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Itziar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hello. Please enter your name:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{n}{name} \PY{o}{=} \PY{n}{sys}\PY{o}{.}\PY{n}{stdin}\PY{o}{.}\PY{n}{readline}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}SI EL NOMBRE SE ENCUENTRA EN LA LISTA, PERMITIR}
+        \PY{k}{if} \PY{n}{name} \PY{o+ow}{in} \PY{n}{personal}\PY{p}{:}
+            \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Access granted.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}NO PERMITIR }
+        \PY{k}{else}\PY{p}{:}
+            \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Acces denied.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    ~
+
+\section{Ejercicio 3}\label{ejercicio-3}
+
+    Sea x un número entero.
+
+\begin{enumerate}
+\def\labelenumi{\Alph{enumi})}
+\item
+  Describa un algoritmo a base de iteraciones para comprobar si x es un
+  número primo.
+\item
+  Escriba un programa en Python que solicite un input de un número
+  entero, y que usa el algoritmo de arriba para comprobar si este número
+  es un número primo.
+\item
+  Escriba un programa para comprobar si un número es el cuadrado de un
+  número primo. Osea, que la raíz del número ingresado sea un número
+  primo.
+\end{enumerate}
+
+Nota: Pruebe al inicio si el número es un cuadrado de un número entero.
+Si eso es verdad, pruebe también si este número es primo.
+
+    \subsection{Solución apartado A)}\label{soluciuxf3n-apartado-a}
+
+La funcion sqrt, se importa para ser usada más adelante.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k+kn}{import} \PY{n}{sqrt} 
+        \PY{c+c1}{\PYZsh{}APARTADO A)}
+        \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{c+c1}{\PYZsh{}DEFINIMOS FUNCION QUE ARROJA SI UN VALOR ES PRIMO O NO }
+        \PY{c+c1}{\PYZsh{}INPUT = X}
+        \PY{c+c1}{\PYZsh{}SI X ES PRIMO, RETORNA 1}
+        \PY{c+c1}{\PYZsh{}SI NO, RETORNA 0}
+        
+        \PY{k}{def} \PY{n+nf}{es\PYZus{}primo}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+        \PY{c+c1}{\PYZsh{}INICIO LOOP DESDE 2 HASTA X\PYZhy{}1 }
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+        
+        \PY{c+c1}{\PYZsh{}LA FUNCION \PYZhy{}IF ANY(LISTA)\PYZhy{} LA APRENDI EN SOLOLEARN (SECCION \PYZdq{}MAS TIPOS \PYZgt{}\PYZgt{} FUNCIONES }
+        \PY{c+c1}{\PYZsh{}UTILES\PYZdq{})}
+        \PY{c+c1}{\PYZsh{}PARA QUE UN NUMERO SEA PRIMO, ESTE DEBE SER DIVISIBLE SOLO POR 1 Y EL MISMO}
+        \PY{c+c1}{\PYZsh{}POR LO TANTO, SI EXISTIERA ALGUN i (IF ANY) QUE EL CUOCIENTE ENTRE EL NUMERO E i }
+        \PY{c+c1}{\PYZsh{}SEA IGUAL A 0, EL NUMERO NO ES PRIMO (Y LA FUNCION RETORNARA 0)}
+                \PY{k}{if} \PY{n+nb}{any}\PY{p}{(}\PY{p}{[}\PY{n}{x}\PY{o}{\PYZpc{}}\PY{k}{i}==0]):
+                    \PY{k}{return} \PY{l+m+mi}{0} 
+            \PY{k}{return} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \subsection{Solución apartado B)}\label{soluciuxf3n-apartado-b}
+
+    Esto va junto con el programa anterior (apartado A)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{x} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ingresa un numero y dire si es primo o no = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        \PY{k}{if} \PY{n}{x}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{:}
+            \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No es primo :( }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{k}{elif} \PY{n}{x}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+            \PY{k}{if} \PY{n}{es\PYZus{}primo}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Es primo!}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No es primo :( }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{else}\PY{p}{:} 
+            \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Debe ser un numero entero y positivo!}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Solución apartado C)}\label{soluciuxf3n-apartado-c}
+
+Esta parte del código va junto con el apartado B (no necesario) y A
+(necesario). Se importa la función sqrt del módulo math para poder
+realizar la operación raíz :)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{y} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ingresa un numero y dire si es el cuadrado de un primo = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}SI NUMERO INGRESADO ES MAYOR A 0, SE SACA LA RAIZ DEL NUMERO}
+        \PY{k}{if} \PY{n}{y}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+            \PY{n}{raiz}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n}{sqrt}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}SINO, PEDIR QUE SEA POSITIVO}
+        \PY{k}{else}\PY{p}{:} 
+            \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Debe ser positivo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}1 POR CONVENIO, NO ES CONSIDERADO PRIMO }
+        \PY{c+c1}{\PYZsh{}LO LEI AQUI: https://es.wikipedia.org/wiki/N\PYZpc{}C3\PYZpc{}BAmero\PYZus{}primo}
+        \PY{k}{if} \PY{n}{raiz}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{:}
+            \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No lo es :( }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}SI LA RAIZ ES DISTINTO DE 1}
+        \PY{k}{else}\PY{p}{:}
+        \PY{c+c1}{\PYZsh{}SI LA RAIZ ES PRIMO (VER APARTADO A)}
+            \PY{k}{if} \PY{n}{es\PYZus{}primo}\PY{p}{(}\PY{n}{raiz}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lo es! del primo }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{raiz}
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No lo es :( }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{Ejercicio 4:}\label{ejercicio-4}
+
+En el siguiente ejercicio, escribiremos programas que usan algoritmos
+diferentes para calcular la tercera raíz con una precisión de ≈ 0.01.
+
+\begin{verbatim}
+a) Escriba un programa que use un algoritmo a base de exhaustive enumeration para la
+determinar la tercera raíz. ¿Cuántas iteraciones necesita para determinarla con la precisión
+deseada para los números 25, 500 y 10000?
+
+b) Escriba un programa que calcula la tercera raíz con el algoritmo de bisección. ¿Cuántas
+iteraciones necesita para determinarla con la precisión deseada para los números 25, 500 y
+10000?
+
+c) Escriba un programa que calcula la tercera raíz con el método de Newton. ¿Cuantas
+iteraciones necesita para determinarla con la precisión deseada para los números 25, 500 y
+10000?
+\end{verbatim}
+
+    \subsection{Solución apartado A)}\label{soluciuxf3n-apartado-a}
+
+Link para ver lectures3-4.pdf -\/-\textgreater{}
+\href{https://www.dropbox.com/s/sbgviuit4x4bzjp/lecture3-4.pdf?dl=0}{dropbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}EXHAUSTIVE ENUMERATION}
+        \PY{c+c1}{\PYZsh{}SE DEFINE FUNCION RAIZ CUBICA}
+        \PY{c+c1}{\PYZsh{}DESCARADAMENTE COPIADO DEL MATERIAL ENVIADO POR PROFESORA}
+        \PY{c+c1}{\PYZsh{}PUEDES ENCONTRAR EL ORIGINAL EN LECTURE3\PYZhy{}4, PAG 68}
+        \PY{c+c1}{\PYZsh{}LOS PASOS MATEMATICOS LOS EXPLICA LA PROFESORA MUCHO MEJOR QUE YO}
+        \PY{c+c1}{\PYZsh{}SIN EMBARGO TRATARE DE DEJAR MIS COMENTARIOS CON LO QUE EL PROGRAMA HACE}
+        \PY{k}{def} \PY{n+nf}{raiz\PYZus{}cubica}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+        \PY{c+c1}{\PYZsh{}PRECISION}
+            \PY{n}{epsilon} \PY{o}{=} \PY{l+m+mf}{0.01} 
+            \PY{n}{step} \PY{o}{=} \PY{n}{epsilon}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3}
+            \PY{n}{ans} \PY{o}{=} \PY{l+m+mf}{0.0}
+        \PY{c+c1}{\PYZsh{}CONTADORA DE ITERACIONES}
+            \PY{n}{count}\PY{o}{=}\PY{l+m+mi}{0}
+        
+            \PY{k}{while} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{ans}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3} \PY{o}{\PYZhy{}} \PY{n}{x}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{epsilon} \PY{o+ow}{and} \PY{n}{ans} \PY{o}{\PYZlt{}}\PY{o}{=}\PY{n}{x}\PY{p}{:}
+        \PY{c+c1}{\PYZsh{}AGREGAR ITERACION HASTA QUE SE ROMPA EL CICLO}
+                \PY{n}{count}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                \PY{n}{ans} \PY{o}{+}\PY{o}{=} \PY{n}{step}
+            \PY{k}{if} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{ans}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3} \PY{o}{\PYZhy{}} \PY{n}{x}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{epsilon}\PY{p}{:}
+                \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No hemos encontrado la raiz de }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{x}
+        
+            \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{* La raiz de}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{es aproximadamente}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ans}
+            \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{* Ocurrieron}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{count}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iteraciones }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}
+        
+        \PY{n}{raiz\PYZus{}cubica}\PY{p}{(}\PY{l+m+mi}{25}\PY{p}{)}
+        \PY{n}{raiz\PYZus{}cubica}\PY{p}{(}\PY{l+m+mi}{500}\PY{p}{)}
+        \PY{n}{raiz\PYZus{}cubica}\PY{p}{(}\PY{l+m+mi}{10000}\PY{p}{)}
+\end{Verbatim}
+
+
+    El programa arroja este resultado:
+
+\begin{verbatim}
+* La raiz de 25 es aproximadamente 2.92362800005. 
+* Ocurrieron 2923628 iteraciones 
+
+* La raiz de 500 es aproximadamente 7.93695300076
+* Ocurrieron 7936953 iteraciones 
+
+* La raiz de 10000 es aproximadamente 21.5443400005
+* Ocurrieron 21544340 iteraciones 
+\end{verbatim}
+
+    \subsection{Solución apartado B)}\label{soluciuxf3n-apartado-b}
+
+De
+\href{https://www.pybonacci.org/2012/04/18/ecuaciones-no-lineales-metodo-de-biseccion-y-metodo-de-newton-en-python/}{aquí}
+pude entender mas o menos el algoritmo planteado por la profesora. Me
+parece bastante interesante este método de programación.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}BISECCION}
+        \PY{c+c1}{\PYZsh{}DESCARADAMENTE COPIADO DEL MATERIAL ENVIADO POR PROFESORA}
+        \PY{c+c1}{\PYZsh{}PUEDES ENCONTRAR EL ORIGINAL EN LECTURE3\PYZhy{}4, PAG 81}
+        \PY{c+c1}{\PYZsh{}SE DEFINE FUNCION RAIZ CUBICA}
+        \PY{k}{def} \PY{n+nf}{raiz\PYZus{}cubica}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+        \PY{c+c1}{\PYZsh{}PRECISION}
+            \PY{n}{epsilon} \PY{o}{=} \PY{l+m+mf}{0.01}
+        \PY{c+c1}{\PYZsh{}MINIMO Y MAXIMO DEL INTERVALO}
+            \PY{n}{low}\PY{p}{,}\PY{n}{high} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n+nb}{max}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{,}\PY{n}{x}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}RESPUESTA}
+            \PY{n}{ans} \PY{o}{=} \PY{p}{(}\PY{n}{high} \PY{o}{+} \PY{n}{low}\PY{p}{)}\PY{o}{/}\PY{l+m+mf}{2.0} 
+        \PY{c+c1}{\PYZsh{}CONTADORA DE ITERACIONES}
+            \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+        
+            \PY{k}{while} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{ans}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3} \PY{o}{\PYZhy{}} \PY{n}{x}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{epsilon}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{}print \PYZsq{}low =\PYZsq{},low, \PYZsq{}high =\PYZsq{},high, \PYZsq{}ans = \PYZsq{},ans}
+                \PY{n}{count} \PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+        \PY{c+c1}{\PYZsh{}SI EL CUADRADO DE LA POSIBLE RESPUESTA ES MENOR QUE X }
+        \PY{c+c1}{\PYZsh{}ENTONCES DEBE ESTAR A LA IZQUIERDA}
+                \PY{k}{if} \PY{n}{ans}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3} \PY{o}{\PYZlt{}} \PY{n}{x}\PY{p}{:}
+                    \PY{n}{low} \PY{o}{=} \PY{n}{ans}
+        \PY{c+c1}{\PYZsh{}SI ES MAYOR, DEBE ESTAR A LA DERECHA}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{high} \PY{o}{=} \PY{n}{ans}
+        
+                \PY{n}{ans} \PY{o}{=} \PY{p}{(}\PY{n}{high} \PY{o}{+} \PY{n}{low}\PY{p}{)}\PY{o}{/}\PY{l+m+mf}{2.0}
+            \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{* La raiz de}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{es aproximadamente}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ans}
+            \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{* Ocurrieron}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{count}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iteraciones }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{raiz\PYZus{}cubica}\PY{p}{(}\PY{l+m+mi}{25}\PY{p}{)}
+        \PY{n}{raiz\PYZus{}cubica}\PY{p}{(}\PY{l+m+mi}{500}\PY{p}{)}
+        \PY{n}{raiz\PYZus{}cubica}\PY{p}{(}\PY{l+m+mi}{10000}\PY{p}{)}
+\end{Verbatim}
+
+
+    El programa arroja este resultado:
+
+\begin{verbatim}
+* La raiz de 25 es aproximadamente 2.92434692383
+* Ocurrieron 14 iteraciones
+
+* La raiz de 500 es aproximadamente 7.93695449829
+* Ocurrieron 19 iteraciones 
+
+* La raiz de 10000 es aproximadamente 21.5443409979
+* Ocurrieron 28 iteraciones 
+\end{verbatim}
+
+    \subsection{Solución apartado C)}\label{soluciuxf3n-apartado-c}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}NEWTON}
+        \PY{c+c1}{\PYZsh{}DESCARADAMENTE COPIADO DEL MATERIAL ENVIADO POR PROFESORA}
+        \PY{c+c1}{\PYZsh{}PUEDES ENCONTRAR EL ORIGINAL EN LECTURE3\PYZhy{}4, PAG 89}
+        \PY{c+c1}{\PYZsh{}SE DEFINE FUNCION RAIZ CUBICA}
+        \PY{k}{def} \PY{n+nf}{raiz\PYZus{}cubica}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+        \PY{c+c1}{\PYZsh{}PRECISION}
+            \PY{n}{epsilon} \PY{o}{=} \PY{l+m+mf}{0.01}
+        \PY{c+c1}{\PYZsh{}RESPUEST}
+            \PY{n}{guess} \PY{o}{=} \PY{n}{x}\PY{o}{/}\PY{l+m+mf}{2.0}
+        \PY{c+c1}{\PYZsh{}CONTADORA DE ITERACIONES}
+            \PY{n}{count}\PY{o}{=}\PY{l+m+mi}{0}
+            \PY{k}{while} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{guess}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3} \PY{o}{\PYZhy{}} \PY{n}{x}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{epsilon}\PY{p}{:}
+                \PY{n}{count}\PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+        \PY{c+c1}{\PYZsh{}METODO DE NEWTON }
+                \PY{n}{guess} \PY{o}{=} \PY{n}{guess} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{n}{guess}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{x}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{p}{(}\PY{n}{guess}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}print(\PYZsq{}* Ocurrieron \PYZsq{}+str(count)+ \PYZsq{} iteraciones \PYZbs{}n\PYZsq{})}
+            \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{* La raiz de}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{es aproximadamente}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{guess}
+            \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{* Ocurrieron}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{count}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iteraciones }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{raiz\PYZus{}cubica}\PY{p}{(}\PY{l+m+mi}{25}\PY{p}{)}
+        \PY{n}{raiz\PYZus{}cubica}\PY{p}{(}\PY{l+m+mi}{500}\PY{p}{)}
+        \PY{n}{raiz\PYZus{}cubica}\PY{p}{(}\PY{l+m+mi}{10000}\PY{p}{)}
+\end{Verbatim}
+
+
+    El programa arroja este resultado:
+
+\begin{verbatim}
+* La raiz de 25 es aproximadamente 2.9242328368
+* Ocurrieron 6 iteraciones 
+
+* La raiz de 500 es aproximadamente 7.93700527704
+* Ocurrieron 12 iteraciones 
+
+* La raiz de 10000 es aproximadamente 21.5443469166
+* Ocurrieron 17 iteraciones 
+\end{verbatim}
+
+    \section{Ejercicio 5}\label{ejercicio-5}
+
+    Ejercicio 5: Usted tiene las siguientes ecuaciones:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  \(x^2 = 4x\)
+\item
+  \(e^x = 4x\)
+\item
+  \(10x = x^2\)
+\end{enumerate}
+
+Para cada ecuación, defina una función \(f(x)\) de forma que el cero de
+la función f sea la solución de la ecuación. Después, calcule también
+\(df/dx\) y use el método de Newton para determinar la solución.
+\textbf{(No nos interesa la solución trivial x = 0 en caso de a) y c).
+Si resulta zero, cambie el supuesto inicial.)}
+
+    \subsection{Solución apartado A)}\label{soluciuxf3n-apartado-a}
+
+    Ésta solución y las que siguen, han sido basadas tras leer la entrada de
+\emph{Shah} en
+\href{https://pythonfornumericalmethods.wordpress.com/2015/10/17/metodo-de-newton/}{este
+link}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}definimos funciones}
+        
+        \PY{c+c1}{\PYZsh{} f1(x)\PYZhy{}\PYZhy{}\PYZhy{}\PYZgt{} x\PYZca{}2 \PYZhy{} 4x }
+        \PY{c+c1}{\PYZsh{} f1\PYZsq{}(x)\PYZhy{}\PYZhy{}\PYZhy{}\PYZgt{} 2x \PYZhy{} 4}
+        \PY{k}{def} \PY{n+nf}{f1}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{\PYZhy{}} \PY{l+m+mi}{4}\PY{o}{*}\PY{n}{x}
+        
+        \PY{k}{def} \PY{n+nf}{df1}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}
+        
+        \PY{c+c1}{\PYZsh{}supuesto inicial (con 2.0 retorna ZeroDivisionError)}
+        \PY{n}{xnew} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{3.0}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{}error tolerado al aproximar }
+        \PY{n}{erro} \PY{o}{=} \PY{l+m+mf}{0.001} 
+        \PY{c+c1}{\PYZsh{}raiz de la funcion}
+        \PY{n}{resp} \PY{o}{=} \PY{n}{xnew}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+        \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{} Metodo de Newton \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}
+        \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Funcion = x\PYZca{}2 \PYZhy{} 4x}\PY{l+s+s1}{\PYZsq{}}
+        \PY{c+c1}{\PYZsh{}try/except por si ocurre division por 0}
+        \PY{k}{try}\PY{p}{:}
+            \PY{k}{while} \PY{n+nb+bp}{True}\PY{p}{:}
+                \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mejor aproximacion = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{resp}
+        \PY{c+c1}{\PYZsh{}metodo de newton\PYZhy{}raphson}
+                \PY{n}{resp} \PY{o}{=} \PY{n}{resp} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{f1}\PY{p}{(}\PY{n}{resp}\PY{p}{)}\PY{o}{/}\PY{n}{df1}\PY{p}{(}\PY{n}{resp}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}agregar esta resp a xnew}
+                \PY{n}{xnew}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{resp}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}alcanzar el error exigido}
+                \PY{k}{if} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{xnew}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{xnew}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{erro}\PY{p}{:}
+                    \PY{k}{break}
+        \PY{k}{except} \PY{p}{(}\PY{n+ne}{ZeroDivisionError}\PY{p}{)}\PY{p}{:}
+            \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ha ocurrido una division por 0. No se puede continuar}\PY{l+s+s1}{\PYZsq{}}
+        \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{***La aproximacion final es}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{resp} 
+\end{Verbatim}
+
+
+    El programa arroja:
+
+\begin{verbatim}
+-------- Metodo de Newton --------
+Funcion = x^2 - 4x 
+Mejor aproximacion =  3.0
+Mejor aproximacion =  4.5
+Mejor aproximacion =  4.05
+Mejor aproximacion =  4.0006097561
+***La aproximacion final es 4.00000009292 
+\end{verbatim}
+
+    \subsection{Solución apartado B)}\label{soluciuxf3n-apartado-b}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}para la funcion exponencial}
+        \PY{k+kn}{from} \PY{n+nn}{math} \PY{k+kn}{import} \PY{n}{exp}
+        \PY{c+c1}{\PYZsh{} definimos funciones}
+        \PY{c+c1}{\PYZsh{} f2(x) \PYZhy{}\PYZhy{}\PYZhy{}\PYZgt{} e\PYZca{}x \PYZhy{} 4x }
+        \PY{c+c1}{\PYZsh{} df2(x) \PYZhy{}\PYZhy{}\PYZhy{}\PYZgt{} e\PYZca{}x \PYZhy{} 4}
+        \PY{k}{def} \PY{n+nf}{f2}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{exp}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{4}\PY{o}{*}\PY{n}{x}
+        \PY{k}{def} \PY{n+nf}{df2}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{exp}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{4} 
+        
+        \PY{c+c1}{\PYZsh{}supuesto inicial}
+        \PY{n}{xnew} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{3.0}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{}error tolerado al aproximar }
+        \PY{n}{erro} \PY{o}{=} \PY{l+m+mf}{0.001} 
+        \PY{c+c1}{\PYZsh{}raiz de la funcion}
+        \PY{n}{resp} \PY{o}{=} \PY{n}{xnew}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+        \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{} Metodo de Newton \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}
+        \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Funcion = e\PYZca{}x \PYZhy{} 4x}\PY{l+s+s1}{\PYZsq{}}
+        \PY{c+c1}{\PYZsh{}try/except por si ocurre division por 0}
+        \PY{k}{try}\PY{p}{:}
+            \PY{k}{while} \PY{n+nb+bp}{True}\PY{p}{:}
+                \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mejor aproximacion = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{resp}
+        \PY{c+c1}{\PYZsh{}metodo de newton\PYZhy{}raphson}
+                \PY{n}{resp} \PY{o}{=} \PY{n}{resp} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{f2}\PY{p}{(}\PY{n}{resp}\PY{p}{)}\PY{o}{/}\PY{n}{df2}\PY{p}{(}\PY{n}{resp}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}agregar esta resp a xnew}
+                \PY{n}{xnew}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{resp}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}alvanzar el error exigido}
+                \PY{k}{if} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{xnew}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{xnew}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{erro}\PY{p}{:}
+                    \PY{k}{break}
+        \PY{k}{except} \PY{p}{(}\PY{n+ne}{ZeroDivisionError}\PY{p}{)}\PY{p}{:}
+            \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ha ocurrido una division por 0. No se puede continuar}\PY{l+s+s1}{\PYZsq{}}
+        \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{***La aproximacion final es}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{resp} 
+\end{Verbatim}
+
+
+    El programa arroja:
+
+\begin{verbatim}
+-------- Metodo de Newton --------
+Funcion = e^x - 4x
+Mejor aproximacion =  3.0
+Mejor aproximacion =  2.49734118533
+Mejor aproximacion =  2.23221940087
+Mejor aproximacion =  2.15860801401
+Mejor aproximacion =  2.15331857522
+***La aproximacion final es 2.15329236475
+\end{verbatim}
+
+    \subsection{Solución apartado C)}\label{soluciuxf3n-apartado-c}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}definimos funciones}
+        
+        \PY{c+c1}{\PYZsh{}f3(x)\PYZhy{}\PYZhy{}\PYZhy{}\PYZgt{}10x \PYZhy{} x\PYZca{}2}
+        \PY{c+c1}{\PYZsh{}df3(x)\PYZhy{}\PYZhy{}\PYZhy{}\PYZgt{}10 \PYZhy{} 2x }
+        \PY{k}{def} \PY{n+nf}{f3}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{l+m+mi}{10}\PY{o}{*}\PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} 
+        \PY{k}{def} \PY{n+nf}{df3}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{l+m+mi}{10} \PY{o}{\PYZhy{}} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{x} 
+        
+        \PY{c+c1}{\PYZsh{}supuesto inicial}
+        \PY{n}{xnew} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{7.0}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{}error tolerado al aproximar }
+        \PY{n}{erro} \PY{o}{=} \PY{l+m+mf}{0.001} 
+        \PY{c+c1}{\PYZsh{}raiz de la funcion}
+        \PY{n}{resp} \PY{o}{=} \PY{n}{xnew}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+        \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{} Metodo de Newton \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}
+        \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Funcion = 10 \PYZhy{} x\PYZca{}2}\PY{l+s+s1}{\PYZsq{}}
+        \PY{c+c1}{\PYZsh{}try/except por si ocurre division por 0}
+        \PY{k}{try}\PY{p}{:}
+            \PY{k}{while} \PY{n+nb+bp}{True}\PY{p}{:}
+                \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mejor aproximacion = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{resp}
+        \PY{c+c1}{\PYZsh{}metodo de newton\PYZhy{}raphson}
+                \PY{n}{resp} \PY{o}{=} \PY{n}{resp} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{f3}\PY{p}{(}\PY{n}{resp}\PY{p}{)}\PY{o}{/}\PY{n}{df3}\PY{p}{(}\PY{n}{resp}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}agregar esta resp a xnew}
+                \PY{n}{xnew}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{resp}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}alcanzar el error exigido}
+                \PY{k}{if} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{xnew}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{xnew}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{erro}\PY{p}{:}
+                    \PY{k}{break}
+        \PY{k}{except} \PY{p}{(}\PY{n+ne}{ZeroDivisionError}\PY{p}{)}\PY{p}{:}
+            \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ha ocurrido una division por 0. No se puede continuar}\PY{l+s+s1}{\PYZsq{}}
+        \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{***La aproximacion final es}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{resp} 
+\end{Verbatim}
+
+
+    El programa arroja:
+
+\begin{verbatim}
+-------- Metodo de Newton --------
+Funcion = 10 - x^2
+Mejor aproximacion =  7.0
+Mejor aproximacion =  12.25
+Mejor aproximacion =  10.349137931
+Mejor aproximacion =  10.0113941065
+Mejor aproximacion =  10.000012953
+***La aproximacion final es 10.0
+\end{verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
