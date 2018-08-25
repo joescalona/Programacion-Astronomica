@@ -1,3 +1,4 @@
+from math import sqrt
 #APARTADO A)
 #-------------------------
 #DEFINIMOS FUNCION QUE ARROJA SI UN VALOR ES PRIMO O NO 
@@ -31,3 +32,22 @@ else:
 
 #-------------------------
 #APARTADO C) 
+y = int(input('Ingresa un numero y dire si es el cuadrado de un primo = '))
+
+#SI NUMERO INGRESADO ES MAYOR A 0, SE SACA LA RAIZ DEL NUMERO
+if y>0:
+    raiz=int(sqrt(y))
+#SINO, PEDIR QUE SEA POSITIVO
+else: 
+    print('Debe ser positivo')
+#1 POR CONVENIO, NO ES CONSIDERADO PRIMO 
+#LO LEI AQUI: https://es.wikipedia.org/wiki/N%C3%BAmero_primo
+if raiz==1:
+    print('No lo es :( ')
+#SI LA RAIZ ES DISTINTO DE 1
+else:
+#SI LA RAIZ ES PRIMO (VER APARTADO A)
+    if es_primo(raiz) == 1:
+        print 'Lo es! del primo ',raiz
+    else:
+        print('No lo es :( ')
