@@ -5,7 +5,6 @@ def des_encriptacion(cadena,desp):
 	res = ""
 	for letra in cadena:
 		pos = abc.find(letra)
-	#el método .find retorna -1 si no encuentra el caracter en el abc
 		if pos == -1:
 			res = res + letra
 			continue
