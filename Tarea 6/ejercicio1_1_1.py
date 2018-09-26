@@ -1,3 +1,5 @@
+# -*-coding: utf-8 -*-
+
 import numpy as np 
 import matplotlib.pyplot as plt 
 
@@ -9,15 +11,18 @@ temperature = temperature[keep]
 i = 0 
 
 #-----------------------------------------------
-d1995 = []
+d1995 = []					#se añadiran todos los datos respectivos
 
-while int(date[i])%1995.==0.:
+while int(date[i])%1995.==0.:			#aqui cada entero de la columna date sera dividido por 
+						#el año correspondiente (en este caso 1995)
+						#en caso que el resto sea 0 (todos los datos que empiecen
+						#por 1995) ingresaran a la lista antes creada
 	d1995.append(date[i])
-	i = i + 1 
+	i = i + 1 				#iterara sobre todos los elementos de la columna
 
-keep2 = np.abs(date)<=1996 
+keep2 = np.abs(date)<=1996 			#se crea una mascara para aceptar datos del año interesado
 
-t1995 = temperature[keep2]
+t1995 = temperature[keep2]			#se aplica esta mascara al año
 #-------------------------------------------------
 
 i = 0
@@ -81,7 +86,8 @@ t2002 = temperature[keep9]
 
 
 #ploteando funciones
-plt.plot(range(len(t1996)),t1996,label = '1996')
+plt.plot(range(len(t1996)),t1996,label = '1996') #se aplica len, ya que queria que ploteara los dias 
+						 #y cada dato era un dia (habian 365 datos por año) 
 
 plt.plot(range(len(t1995)),t1995,label='1995')
 
